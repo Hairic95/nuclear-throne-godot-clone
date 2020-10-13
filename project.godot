@@ -1,0 +1,51 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Area2D",
+"class": "Bullet",
+"language": "GDScript",
+"path": "res://src/entities/bullets/Bullet.gd"
+}, {
+"base": "Sprite",
+"class": "Weapon",
+"language": "GDScript",
+"path": "res://src/entities/weapons/Weapon.gd"
+} ]
+_global_script_class_icons={
+"Bullet": "",
+"Weapon": ""
+}
+
+[application]
+
+config/name="NTClone"
+run/main_scene="res://src/scenes/TestScene.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+EventBus="*res://src/autoloads/EventBus.gd"
+
+[input]
+
+click={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+vram_compression/import_etc=true
+vram_compression/import_etc2=false
+environment/default_clear_color=Color( 0.290196, 0.329412, 0.384314, 1 )
+environment/default_environment="res://default_env.tres"
