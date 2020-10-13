@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/gun.png-069bf03082a1d9914a74c84e535e4bfb.stex"
+path="res://.import/fungus.png-8d0951b40292a2256ea88b1aeae9074e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/weapons/gun.png"
-dest_files=[ "res://.import/gun.png-069bf03082a1d9914a74c84e535e4bfb.stex" ]
+source_file="res://assets/textures/entitites/player/fungus.png"
+dest_files=[ "res://.import/fungus.png-8d0951b40292a2256ea88b1aeae9074e.stex" ]
 
 [params]
 

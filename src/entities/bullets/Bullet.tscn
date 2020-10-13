@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/weapons/bullet_gun.png" type="Texture" id=1]
+[ext_resource path="res://assets/textures/weapons/bullet_gun.png" type="Texture" id=1]
 [ext_resource path="res://src/entities/bullets/Bullet.gd" type="Script" id=2]
 
 [sub_resource type="Animation" id=1]
@@ -23,6 +23,8 @@ radius = 5.33333
 height = 5.33333
 
 [node name="Area2D" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -35,4 +37,7 @@ anims/fired = SubResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource( 2 )
+
+[node name="Direction" type="RayCast2D" parent="."]
+cast_to = Vector2( 20, 0 )
 [connection signal="body_entered" from="." to="." method="_on_Area2D_body_entered"]

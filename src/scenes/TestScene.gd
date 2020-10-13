@@ -1,7 +1,12 @@
 extends Node2D
 
+onready var player = $YSortable/Entities/Player
+
 func _ready():
 	EventBus.connect("create_bullet", self, "add_bullet")
+	
+	EventBus.connect("close_to_interactive_object", self, "set_new_interaction")
+	EventBus.connect("far_from_interactive_object", self, "close_current_interaction")
 	
 	$LevelGeneration.create_level_with_explosion()
 	
@@ -16,4 +21,13 @@ func add_bullet(bullet_instance, starting_position, bullet_rotation):
 	bullet_instance.global_position = starting_position
 	bullet_instance.rotation = bullet_rotation
 	bullet_instance.setup()
-	$YSortable/Bullets.add_child(bullet_instance)
+	$Bullets.add_child(bullet_instance)
+
+func set_new_interaction(obj : InteractiveObject):
+	player.current_interactive_obj = obj
+	$UI/Control/Label.text = obj.message
+
+func close_current_interaction(obj : InteractiveObject):
+	if player.current_interactive_obj == obj:
+		player.current_interactive_obj = null
+		$UI/Control/Label.text = ""

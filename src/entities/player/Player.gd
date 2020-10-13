@@ -9,6 +9,8 @@ var is_moving_by_player : bool = false
 
 var direction_input : Vector2 = Vector2.ZERO
 
+var current_interactive_obj : InteractiveObject = null
+
 func _ready():
 	$AnimTree.active = true
 
@@ -33,6 +35,9 @@ func _process(delta):
 		if Input.is_key_pressed(KEY_K):
 			$AnimTree.set("parameters/tr_alive/current", 1)
 			is_alive = false
+		
+		if Input.is_action_just_pressed("interact") and current_interactive_obj != null:
+			current_interactive_obj.interact()
 		
 		if Input.is_key_pressed(KEY_W) || Input.is_key_pressed(KEY_S) || Input.is_key_pressed(KEY_A) || Input.is_key_pressed(KEY_D):
 			is_moving_by_player = true

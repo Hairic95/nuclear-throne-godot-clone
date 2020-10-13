@@ -1,7 +1,7 @@
 extends Area2D
 class_name Bullet
 
-var speed : float = 1000
+var speed : float = 800
 
 var direction : Vector2 = Vector2.ZERO
 
@@ -18,6 +18,10 @@ func _physics_process(delta):
 		queue_free()
 	else:
 		timer += delta
+	
+	if $Direction.is_colliding():
+		# TODO Change to a destroy animation
+		$Sprite.hide()
 	
 
 func setup():

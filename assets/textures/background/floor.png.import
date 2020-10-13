@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bullet_gun.png-026dba13ab2f00caa1ff6fa79df083bc.stex"
+path="res://.import/floor.png-a4185361044ef028163a45ff479c281e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/weapons/bullet_gun.png"
-dest_files=[ "res://.import/bullet_gun.png-026dba13ab2f00caa1ff6fa79df083bc.stex" ]
+source_file="res://assets/textures/background/floor.png"
+dest_files=[ "res://.import/floor.png-a4185361044ef028163a45ff479c281e.stex" ]
 
 [params]
 

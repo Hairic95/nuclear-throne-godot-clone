@@ -1,8 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/background/wall.png" type="Texture" id=1]
-[ext_resource path="res://assets/background/floor.png" type="Texture" id=2]
-[ext_resource path="res://assets/background/outer_wall.png" type="Texture" id=3]
+[ext_resource path="res://assets/textures/background/wall.png" type="Texture" id=1]
+[ext_resource path="res://assets/textures/background/floor.png" type="Texture" id=2]
+[ext_resource path="res://assets/textures/background/outer_wall.png" type="Texture" id=3]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8.5 )

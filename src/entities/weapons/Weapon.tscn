@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/sounds/weapons/shoot_test.wav" type="AudioStream" id=1]
-[ext_resource path="res://assets/weapons/gun.png" type="Texture" id=2]
+[ext_resource path="res://assets/textures/weapons/gun.png" type="Texture" id=2]
 [ext_resource path="res://src/entities/weapons/Weapon.gd" type="Script" id=3]
 
 [node name="Gun" type="Sprite"]

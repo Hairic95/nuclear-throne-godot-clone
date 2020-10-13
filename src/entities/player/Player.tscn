@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/entities/player/Player.gd" type="Script" id=1]
-[ext_resource path="res://assets/entitites/player/fungus.png" type="Texture" id=2]
+[ext_resource path="res://assets/textures/entitites/player/fungus.png" type="Texture" id=2]
 [ext_resource path="res://src/entities/weapons/Weapon.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/entities/player/CameraHandler.gd" type="Script" id=4]
 
@@ -166,7 +166,7 @@ nodes/tr_alive/node = SubResource( 11 )
 nodes/tr_alive/position = Vector2( 980, 220 )
 nodes/tr_movement/node = SubResource( 12 )
 nodes/tr_movement/position = Vector2( 420, 180 )
-node_connections = [ "output", 0, "tr_alive", "tr_movement", 0, "an_idle", "tr_movement", 1, "an_run", "tr_alive", 0, "os_hurt", "tr_alive", 1, "an_dead", "os_hurt", 0, "tr_movement", "os_hurt", 1, "an_hurt" ]
+node_connections = [ "output", 0, "tr_alive", "os_hurt", 0, "tr_movement", "os_hurt", 1, "an_hurt", "tr_alive", 0, "os_hurt", "tr_alive", 1, "an_dead", "tr_movement", 0, "an_idle", "tr_movement", 1, "an_run" ]
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -200,7 +200,6 @@ script = ExtResource( 4 )
 
 [node name="Camera2D" type="Camera2D" parent="CameraHandler"]
 current = true
-zoom = Vector2( 0.25, 0.25 )
 smoothing_enabled = true
 smoothing_speed = 10.0
 
