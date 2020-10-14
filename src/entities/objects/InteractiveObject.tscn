@@ -1,20 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/textures/weapons/gun.png" type="Texture" id=1]
 [ext_resource path="res://src/entities/objects/InteractiveObject.gd" type="Script" id=2]
-[ext_resource path="res://assets/fonts/Minecraft.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 5.52875
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 5.59482
-
-[sub_resource type="DynamicFont" id=3]
-size = 8
-outline_size = 1
-extra_spacing_char = 1
-font_data = ExtResource( 3 )
 
 [node name="InteractiveObject" type="RigidBody2D"]
 collision_layer = 2
@@ -33,19 +26,5 @@ shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectBox"]
 shape = SubResource( 2 )
-
-[node name="Interaction" type="Label" parent="."]
-visible = false
-margin_left = -40.0
-margin_top = -24.0
-margin_right = 40.0
-margin_bottom = -10.0
-custom_fonts/font = SubResource( 3 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "GUN"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 [connection signal="body_entered" from="CollectBox" to="." method="_on_CollectBox_body_entered"]
 [connection signal="body_exited" from="CollectBox" to="." method="_on_CollectBox_body_exited"]

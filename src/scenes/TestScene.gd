@@ -26,6 +26,10 @@ func add_bullet(bullet_instance, starting_position, bullet_rotation):
 	$Bullets.add_child(bullet_instance)
 
 func set_new_interaction(obj : InteractiveObject):
+	var new_label = Label.new()
+	new_label.text = obj.message
+	new_label.rect_global_position = obj.global_position
+	$Popup.add_child(new_label)
 	player.current_interactive_obj = obj
 	$UI/Control/Label.text = obj.message
 
