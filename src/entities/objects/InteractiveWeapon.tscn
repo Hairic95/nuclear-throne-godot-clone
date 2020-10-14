@@ -4,6 +4,8 @@
 [ext_resource path="res://src/entities/objects/InteractiveWeapon.gd" type="Script" id=2]
 
 [sub_resource type="PhysicsMaterial" id=1]
+rough = true
+bounce = 0.2
 
 [node name="InteractiveWeapon" instance=ExtResource( 1 )]
 mass = 1.0
