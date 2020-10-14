@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/entities/objects/InteractiveObject.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/entities/objects/InteractiveWeapon.gd" type="Script" id=2]
+
+[sub_resource type="PhysicsMaterial" id=1]
+
+[node name="InteractiveWeapon" instance=ExtResource( 1 )]
+mass = 1.0
+physics_material_override = SubResource( 1 )
+continuous_cd = 1
+linear_damp = 1.0
+script = ExtResource( 2 )

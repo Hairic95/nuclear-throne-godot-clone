@@ -8,6 +8,8 @@ func _ready():
 	EventBus.connect("close_to_interactive_object", self, "set_new_interaction")
 	EventBus.connect("far_from_interactive_object", self, "close_current_interaction")
 	
+	EventBus.connect("test_throw_weapon", self, "test_throw_weapon")
+	
 	$LevelGeneration.create_level_with_explosion()
 	
 	for tile in ($LevelGeneration.tiles):
@@ -31,3 +33,9 @@ func close_current_interaction(obj : InteractiveObject):
 	if player.current_interactive_obj == obj:
 		player.current_interactive_obj = null
 		$UI/Control/Label.text = ""
+
+func test_throw_weapon(direction):
+	var new_thrown_weapon = load("res://src/entities/objects/InteractiveWeapon.tscn").instance()
+	new_thrown_weapon.global_position = $YSortable/Entities/Player.global_position
+	$YSortable/Entities.add_child(new_thrown_weapon)
+	new_thrown_weapon.throw(direction, 420)

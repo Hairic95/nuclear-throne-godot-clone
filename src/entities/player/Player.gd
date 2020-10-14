@@ -38,6 +38,8 @@ func _process(delta):
 		
 		if Input.is_action_just_pressed("interact") and current_interactive_obj != null:
 			current_interactive_obj.interact()
+		if Input.is_action_just_pressed("ability"):
+			EventBus.emit_signal("test_throw_weapon", Vector2(cos($Gun.rotation), sin($Gun.rotation)))
 		
 		if Input.is_key_pressed(KEY_W) || Input.is_key_pressed(KEY_S) || Input.is_key_pressed(KEY_A) || Input.is_key_pressed(KEY_D):
 			is_moving_by_player = true

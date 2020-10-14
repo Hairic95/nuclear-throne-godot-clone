@@ -4,7 +4,7 @@
 [ext_resource path="res://src/scenes/TestScene.gd" type="Script" id=2]
 [ext_resource path="res://assets/textures/background/TestTileset.tres" type="TileSet" id=3]
 [ext_resource path="res://src/scenes/LevelGeneration.gd" type="Script" id=4]
-[ext_resource path="res://src/entities/objects/InteractiveObject.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/entities/objects/InteractiveWeapon.tscn" type="PackedScene" id=5]
 
 [node name="TestScene" type="Node2D"]
 script = ExtResource( 2 )
@@ -26,17 +26,23 @@ format = 1
 "player",
 ] instance=ExtResource( 1 )]
 
-[node name="InteractiveObject" parent="YSortable/Entities" instance=ExtResource( 5 )]
+[node name="InteractiveWeapon" parent="YSortable/Entities" instance=ExtResource( 5 )]
 
-[node name="InteractiveObject2" parent="YSortable/Entities" instance=ExtResource( 5 )]
+[node name="InteractiveWeapon2" parent="YSortable/Entities" instance=ExtResource( 5 )]
 
-[node name="InteractiveObject3" parent="YSortable/Entities" instance=ExtResource( 5 )]
+[node name="InteractiveWeapon3" parent="YSortable/Entities" instance=ExtResource( 5 )]
 
-[node name="InteractiveObject4" parent="YSortable/Entities" instance=ExtResource( 5 )]
+[node name="InteractiveWeapon4" parent="YSortable/Entities" instance=ExtResource( 5 )]
 
-[node name="InteractiveObject5" parent="YSortable/Entities" instance=ExtResource( 5 )]
+[node name="InteractiveWeapon5" parent="YSortable/Entities" instance=ExtResource( 5 )]
 
-[node name="InteractiveObject6" parent="YSortable/Entities" instance=ExtResource( 5 )]
+[node name="InteractiveWeapon6" parent="YSortable/Entities" instance=ExtResource( 5 )]
+
+[node name="InteractiveWeapon7" parent="YSortable/Entities" instance=ExtResource( 5 )]
+
+[node name="InteractiveWeapon8" parent="YSortable/Entities" instance=ExtResource( 5 )]
+
+[node name="InteractiveWeapon9" parent="YSortable/Entities" instance=ExtResource( 5 )]
 
 [node name="StaticsWalls" type="YSort" parent="YSortable"]
 
