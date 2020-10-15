@@ -35,6 +35,11 @@ func close_current_interaction(obj : InteractiveObject):
 
 func test_throw_weapon(direction):
 	var new_thrown_weapon = load("res://src/entities/objects/InteractiveWeapon.tscn").instance()
+	
+	if randi()%2 == 0:
+		new_thrown_weapon.set_image(load("res://assets/textures/weapons/rifle.png"))
+		new_thrown_weapon.weapon_at_pickup = load("res://src/entities/weapons/Rifle.tscn")
+	
 	new_thrown_weapon.global_position = $YSortable/Entities/Player.global_position
 	$YSortable/Entities.add_child(new_thrown_weapon)
 	new_thrown_weapon.throw(direction, 420)

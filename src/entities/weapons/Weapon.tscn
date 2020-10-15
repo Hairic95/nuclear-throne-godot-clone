@@ -9,8 +9,9 @@ texture = ExtResource( 2 )
 offset = Vector2( 7, 0 )
 script = ExtResource( 3 )
 
-[node name="BulletSpawn" type="Position2D" parent="."]
-position = Vector2( 8, -2 )
-
 [node name="ShootEffect" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 1 )
+
+[node name="Reloading" type="Timer" parent="."]
+one_shot = true
+[connection signal="timeout" from="Reloading" to="." method="_on_Reloading_timeout"]

@@ -5,7 +5,7 @@
 [ext_resource path="res://src/entities/player/CameraHandler.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6, 5 )
+extents = Vector2( 6, 4 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "dead"
@@ -173,10 +173,10 @@ node_connections = [ "output", 0, "tr_alive", "os_hurt", 0, "tr_movement", "os_h
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 4 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -5 )
 texture = ExtResource( 2 )
 hframes = 12
 frame = 2

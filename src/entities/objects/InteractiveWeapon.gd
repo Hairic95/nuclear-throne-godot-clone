@@ -9,3 +9,5 @@ func _ready():
 func throw(direction, force):
 	apply_central_impulse(direction * force)
 
+func set_image(texture : Texture):
+	$Sprite.texture = texture

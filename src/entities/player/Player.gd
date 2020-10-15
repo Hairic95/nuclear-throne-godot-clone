@@ -11,8 +11,6 @@ var direction_input : Vector2 = Vector2.ZERO
 
 var current_interactive_obj : InteractiveObject = null
 
-onready var current_active_weapon
-
 func _ready():
 	$AnimTree.active = true
 
@@ -26,10 +24,14 @@ func _process(delta):
 			direction_input.y = 1
 		if Input.is_key_pressed(KEY_A):
 			direction_input.x = -1
-			$Sprite.flip_h = true
 		if Input.is_key_pressed(KEY_D):
 			direction_input.x = 1
+		
+		if get_global_mouse_position().x < global_position.x:
+			$Sprite.flip_h = true
+		if get_global_mouse_position().x > global_position.x:
 			$Sprite.flip_h = false
+		
 		
 		if Input.is_key_pressed(KEY_H):
 			$AnimTree.set("parameters/os_hurt/active", true)
@@ -63,8 +65,14 @@ func _process(delta):
 func add_weapon(new_weapon_reference):
 	
 	var new_weapon = new_weapon_reference.instance()
-	$Weapons.add_child(new_weapon)
+	new_weapon.set_active(true)
+	new_weapon.handle_rotatation()
 	
+	for weapon in $Weapons.get_children():
+		weapon.set_active(false)
+	
+	$Weapons.add_child(new_weapon)
+
 
 func handle_camera_position():
 	var new_camera_position = global_position + (get_global_mouse_position() - global_position) / 3

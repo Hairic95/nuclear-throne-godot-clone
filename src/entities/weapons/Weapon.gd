@@ -3,18 +3,32 @@ class_name Weapon
 
 export (String) var id = "gun"
 
+export (bool) var is_automatic = false
+
+export (float) var reload_time = 0.2
+
 export (PackedScene) var drop_weapon = preload("res://src/entities/objects/InteractiveWeapon.tscn")
 export (PackedScene) var bullet_reference = preload("res://src/entities/bullets/Bullet.tscn")
 
+var active : bool = false
+
+var is_reloading = false
+
 func _ready():
-	pass
+	$Reloading.wait_time = reload_time
 
 func _process(d):
-	if Input.is_action_just_pressed("click"):
-		$ShootEffect.pitch_scale = 0.7 + (randf() / 2 - 0.25)
-		$ShootEffect.play()
-		EventBus.emit_signal("create_bullet", bullet_reference.instance(), global_position, rotation)
-		EventBus.emit_signal("start_screenshake", 10)
+	if active:
+		if is_automatic:
+			if Input.is_action_pressed("click") and !is_reloading:
+				shoot()
+				is_reloading = true
+				$Reloading.start()
+		else:
+			if Input.is_action_just_pressed("click") and !is_reloading:
+				shoot()
+				is_reloading = true
+				$Reloading.start()
 	handle_rotatation()
 
 
@@ -27,3 +41,17 @@ func handle_rotatation():
 		flip_v = false
 	else:
 		flip_v = true
+
+func set_active(value):
+	active = value
+	visible = value
+
+func shoot():
+	$ShootEffect.pitch_scale = 0.7 + (randf() / 2 - 0.25)
+	$ShootEffect.play()
+	EventBus.emit_signal("create_bullet", bullet_reference.instance(), global_position, rotation)
+	EventBus.emit_signal("start_screenshake", 10)
+
+
+func _on_Reloading_timeout():
+	is_reloading = false
