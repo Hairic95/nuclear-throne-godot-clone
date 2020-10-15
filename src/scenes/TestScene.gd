@@ -1,5 +1,8 @@
 extends Node2D
 
+export (PackedScene) var rifle_reference
+export (PackedScene) var pistol_reference
+
 onready var player = $YSortable/Entities/Player
 
 func _ready():
@@ -9,6 +12,8 @@ func _ready():
 	EventBus.connect("far_from_interactive_object", self, "close_current_interaction")
 	
 	EventBus.connect("test_throw_weapon", self, "test_throw_weapon")
+	
+	EventBus.connect("drop_weapon", self, "create_drop_weapon_at")
 	
 	$LevelGeneration.create_level_with_explosion()
 	
@@ -34,12 +39,17 @@ func close_current_interaction(obj : InteractiveObject):
 		player.current_interactive_obj = null
 
 func test_throw_weapon(direction):
-	var new_thrown_weapon = load("res://src/entities/objects/InteractiveWeapon.tscn").instance()
+	var new_thrown_weapon
 	
 	if randi()%2 == 0:
-		new_thrown_weapon.set_image(load("res://assets/textures/weapons/rifle.png"))
-		new_thrown_weapon.weapon_at_pickup = load("res://src/entities/weapons/Rifle.tscn")
+		new_thrown_weapon = rifle_reference.instance()
+	else:
+		new_thrown_weapon = pistol_reference.instance()
 	
 	new_thrown_weapon.global_position = $YSortable/Entities/Player.global_position
 	$YSortable/Entities.add_child(new_thrown_weapon)
 	new_thrown_weapon.throw(direction, 420)
+
+func create_drop_weapon_at(weapon_instance, global_pos):
+	weapon_instance.global_position = global_pos
+	$YSortable/Entities.add_child(weapon_instance)

@@ -7,8 +7,8 @@ export (bool) var is_automatic = false
 
 export (float) var reload_time = 0.2
 
-export (PackedScene) var drop_weapon = preload("res://src/entities/objects/InteractiveWeapon.tscn")
-export (PackedScene) var bullet_reference = preload("res://src/entities/bullets/Bullet.tscn")
+export (PackedScene) var drop_weapon 
+export (PackedScene) var bullet_reference = load("res://src/entities/bullets/Bullet.tscn")
 
 var active : bool = false
 
@@ -34,7 +34,8 @@ func _process(d):
 
 func handle_rotatation():
 	# Orients the gun where the mouse is
-	look_at(get_global_mouse_position())
+	if get_global_mouse_position() != null:
+		look_at(get_global_mouse_position())
 	
 	# Handle the gun sprite in order not to show it upside down when on the opposite side
 	if cos(rotation) > 0:

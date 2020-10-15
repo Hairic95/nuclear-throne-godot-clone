@@ -11,6 +11,10 @@ var direction_input : Vector2 = Vector2.ZERO
 
 var current_interactive_obj : InteractiveObject = null
 
+var current_weapon = null
+
+var max_weapon_slot = 2
+
 func _ready():
 	$AnimTree.active = true
 
@@ -47,6 +51,9 @@ func _process(delta):
 		if Input.is_action_just_pressed("ability"):
 			EventBus.emit_signal("test_throw_weapon", Vector2(get_global_mouse_position() - global_position).normalized())
 		
+		if Input.is_action_just_pressed("next_weapon"):
+			next_weapon()
+		
 		if Input.is_key_pressed(KEY_W) || Input.is_key_pressed(KEY_S) || Input.is_key_pressed(KEY_A) || Input.is_key_pressed(KEY_D):
 			is_moving_by_player = true
 		
@@ -63,16 +70,40 @@ func _process(delta):
 	is_moving_by_player = false
 
 func add_weapon(new_weapon_reference):
-	
 	var new_weapon = new_weapon_reference.instance()
-	new_weapon.set_active(true)
-	new_weapon.handle_rotatation()
+	if $Weapons.get_child_count() >= max_weapon_slot:
+		drop_current_weapon()
+	$Weapons.add_child(new_weapon)
+	set_current_weapon(new_weapon)
+
+func next_weapon():
+	
+	for weapon_index in range($Weapons.get_child_count()):
+		if $Weapons.get_child(weapon_index).active:
+			print(weapon_index)
+			print($Weapons.get_child_count())
+			if $Weapons.get_child_count() - 1 == weapon_index:
+				print(current_weapon)
+				set_current_weapon($Weapons.get_child(0))
+			else:
+				set_current_weapon($Weapons.get_child(weapon_index + 1))
+			break
+
+func set_current_weapon(new_current_weapon):
 	
 	for weapon in $Weapons.get_children():
 		weapon.set_active(false)
 	
-	$Weapons.add_child(new_weapon)
+	new_current_weapon.set_active(true)
+	current_weapon = new_current_weapon
+	new_current_weapon.handle_rotatation()
 
+func drop_current_weapon():
+	var new_interactive_weapon = current_weapon.drop_weapon.instance()
+	EventBus.emit_signal("drop_weapon", new_interactive_weapon, global_position)
+	
+	current_weapon.queue_free()
+	current_weapon = null
 
 func handle_camera_position():
 	var new_camera_position = global_position + (get_global_mouse_position() - global_position) / 3

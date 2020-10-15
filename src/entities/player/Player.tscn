@@ -5,7 +5,7 @@
 [ext_resource path="res://src/entities/player/CameraHandler.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6, 4 )
+extents = Vector2( 6, 5 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "dead"
@@ -165,7 +165,7 @@ nodes/tr_alive/node = SubResource( 11 )
 nodes/tr_alive/position = Vector2( 980, 220 )
 nodes/tr_movement/node = SubResource( 12 )
 nodes/tr_movement/position = Vector2( 420, 180 )
-node_connections = [ "output", 0, "tr_alive", "os_hurt", 0, "tr_movement", "os_hurt", 1, "an_hurt", "tr_alive", 0, "os_hurt", "tr_alive", 1, "an_dead", "tr_movement", 0, "an_idle", "tr_movement", 1, "an_run" ]
+node_connections = [ "output", 0, "tr_alive", "tr_alive", 0, "os_hurt", "tr_alive", 1, "an_dead", "os_hurt", 0, "tr_movement", "os_hurt", 1, "an_hurt", "tr_movement", 0, "an_idle", "tr_movement", 1, "an_run" ]
 
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
@@ -173,10 +173,11 @@ node_connections = [ "output", 0, "tr_alive", "os_hurt", 0, "tr_movement", "os_h
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 4 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -5 )
+position = Vector2( 0, -2 )
 texture = ExtResource( 2 )
 hframes = 12
 frame = 2
