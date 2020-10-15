@@ -27,5 +27,5 @@ func _physics_process(delta):
 func setup():
 	direction = Vector2(cos(rotation), sin(rotation))
 
-func _on_Area2D_body_entered(body):
+func _on_WallDetect_body_entered(body):
 	queue_free()

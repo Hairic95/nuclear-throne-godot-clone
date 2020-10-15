@@ -13,6 +13,8 @@ tile_set = ExtResource( 3 )
 cell_size = Vector2( 16, 16 )
 format = 1
 
+[node name="Bullets" type="Node2D" parent="."]
+
 [node name="YSortable" type="YSort" parent="."]
 
 [node name="StaticWalls" type="TileMap" parent="YSortable"]
@@ -22,8 +24,6 @@ cell_y_sort = true
 collision_layer = 7
 collision_mask = 7
 format = 1
-
-[node name="Bullets" type="YSort" parent="YSortable"]
 
 [node name="Entities" type="YSort" parent="YSortable"]
 

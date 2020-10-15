@@ -12,8 +12,6 @@ func _ready():
 	
 	$LevelGeneration.create_level_with_explosion()
 	
-	print($LevelGeneration.tiles)
-	
 	for tile in ($LevelGeneration.tiles):
 		$Statics.set_cell(tile.x, tile.y, 0)
 	for wall in ($LevelGeneration.walls):
@@ -25,7 +23,7 @@ func add_bullet(bullet_instance, starting_position, bullet_rotation):
 	bullet_instance.global_position = starting_position
 	bullet_instance.rotation = bullet_rotation
 	bullet_instance.setup()
-	$YSortable/Bullets.add_child(bullet_instance)
+	$Bullets.add_child(bullet_instance)
 
 func set_new_interaction(obj : InteractiveObject):
 	var new_label = Label.new()
