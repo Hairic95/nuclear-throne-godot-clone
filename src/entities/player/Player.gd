@@ -11,6 +11,8 @@ var direction_input : Vector2 = Vector2.ZERO
 
 var current_interactive_obj : InteractiveObject = null
 
+onready var current_active_weapon
+
 func _ready():
 	$AnimTree.active = true
 
@@ -37,9 +39,11 @@ func _process(delta):
 			is_alive = false
 		
 		if Input.is_action_just_pressed("interact") and current_interactive_obj != null:
-			current_interactive_obj.interact()
+			if current_interactive_obj is InteractiveWeapon:
+				add_weapon(current_interactive_obj.weapon_at_pickup)
+				current_interactive_obj.interact()
 		if Input.is_action_just_pressed("ability"):
-			EventBus.emit_signal("test_throw_weapon", Vector2(cos($Gun.rotation), sin($Gun.rotation)))
+			EventBus.emit_signal("test_throw_weapon", Vector2(get_global_mouse_position() - global_position).normalized())
 		
 		if Input.is_key_pressed(KEY_W) || Input.is_key_pressed(KEY_S) || Input.is_key_pressed(KEY_A) || Input.is_key_pressed(KEY_D):
 			is_moving_by_player = true
@@ -49,7 +53,6 @@ func _process(delta):
 		else:
 			 $AnimTree.set("parameters/tr_movement/current", 0)
 		
-		handle_gun_rotatation()
 		handle_camera_position()
 	
 	move_and_slide(direction_input.normalized() * SPEED)
@@ -57,16 +60,11 @@ func _process(delta):
 	direction_input = Vector2.ZERO
 	is_moving_by_player = false
 
-func handle_gun_rotatation():
+func add_weapon(new_weapon_reference):
 	
-	# Orients the gun where the mouse is
-	$Gun.look_at(get_global_mouse_position())
+	var new_weapon = new_weapon_reference.instance()
+	$Weapons.add_child(new_weapon)
 	
-	# Handle the gun sprite in order not to show it upside down when on the opposite side
-	if cos($Gun.rotation) > 0:
-		$Gun.flip_v = false
-	else:
-		$Gun.flip_v = true
 
 func handle_camera_position():
 	var new_camera_position = global_position + (get_global_mouse_position() - global_position) / 3

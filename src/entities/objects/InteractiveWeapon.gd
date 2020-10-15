@@ -1,4 +1,5 @@
 extends InteractiveObject
+class_name InteractiveWeapon
 
 export (PackedScene) var weapon_at_pickup = load("res://src/entities/weapons/Weapon.tscn")
 
