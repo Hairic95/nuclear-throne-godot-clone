@@ -12,7 +12,7 @@ func _ready():
 
 func shoot():
 	.shoot()
-	yield(get_tree().create_timer(.09), "timeout")
+	yield(get_tree().create_timer(.05), "timeout")
 	.shoot()
-	yield(get_tree().create_timer(.09), "timeout")
+	yield(get_tree().create_timer(.05), "timeout")
 	.shoot()
