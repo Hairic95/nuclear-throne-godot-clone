@@ -109,6 +109,14 @@ func create_level_with_explosion():
 			walls.append(tile + Vector2.LEFT)
 		if !(tiles.has(tile + Vector2.RIGHT)):
 			walls.append(tile + Vector2.RIGHT)
+		if !(tiles.has(tile + Vector2.UP + Vector2.LEFT)):
+			walls.append(tile + Vector2.UP + Vector2.LEFT)
+		if !(tiles.has(tile + Vector2.DOWN + Vector2.LEFT)):
+			walls.append(tile + Vector2.DOWN + Vector2.LEFT)
+		if !(tiles.has(tile + Vector2.UP + Vector2.RIGHT)):
+			walls.append(tile + Vector2.UP + Vector2.RIGHT)
+		if !(tiles.has(tile + Vector2.DOWN + Vector2.RIGHT)):
+			walls.append(tile + Vector2.DOWN + Vector2.RIGHT)
 	
 	for wall in walls:
 		if !walls.has(wall + Vector2.DOWN) && !tiles.has(wall + Vector2.DOWN):
