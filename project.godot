@@ -9,10 +9,15 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "RigidBody2D",
+"base": "KinematicBody2D",
 "class": "Bullet",
 "language": "GDScript",
 "path": "res://src/entities/bullets/Bullet.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://src/entities/enemies/Enemy.gd"
 }, {
 "base": "RigidBody2D",
 "class": "InteractiveObject",
@@ -31,6 +36,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Bullet": "",
+"Enemy": "",
 "InteractiveObject": "",
 "InteractiveWeapon": "",
 "Weapon": ""

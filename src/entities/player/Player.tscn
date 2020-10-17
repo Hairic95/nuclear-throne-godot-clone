@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/entities/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/textures/entitites/player/fungus.png" type="Texture" id=2]
+[ext_resource path="res://assets/animation_tree/character_basic_tree.tres" type="AnimationNodeBlendTree" id=3]
 [ext_resource path="res://src/entities/player/CameraHandler.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -120,53 +121,6 @@ tracks/1/keys = {
 "values": [ 4, 5, 6, 7, 8, 9 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=6]
-animation = "dead"
-
-[sub_resource type="AnimationNodeAnimation" id=7]
-animation = "hurt"
-
-[sub_resource type="AnimationNodeAnimation" id=8]
-animation = "idle"
-
-[sub_resource type="AnimationNodeAnimation" id=9]
-animation = "run"
-
-[sub_resource type="AnimationNodeOneShot" id=10]
-
-[sub_resource type="AnimationNodeTransition" id=11]
-input_count = 2
-input_0/name = "alive"
-input_0/auto_advance = false
-input_1/name = "dead"
-input_1/auto_advance = false
-
-[sub_resource type="AnimationNodeTransition" id=12]
-input_count = 2
-input_0/name = "idle"
-input_0/auto_advance = false
-input_1/name = "run"
-input_1/auto_advance = false
-
-[sub_resource type="AnimationNodeBlendTree" id=13]
-graph_offset = Vector2( 0, 69 )
-nodes/an_dead/node = SubResource( 6 )
-nodes/an_dead/position = Vector2( 700, 440 )
-nodes/an_hurt/node = SubResource( 7 )
-nodes/an_hurt/position = Vector2( 420, 380 )
-nodes/an_idle/node = SubResource( 8 )
-nodes/an_idle/position = Vector2( 180, 80 )
-nodes/an_run/node = SubResource( 9 )
-nodes/an_run/position = Vector2( 180, 220 )
-nodes/os_hurt/node = SubResource( 10 )
-nodes/os_hurt/position = Vector2( 680, 220 )
-nodes/output/position = Vector2( 1180, 140 )
-nodes/tr_alive/node = SubResource( 11 )
-nodes/tr_alive/position = Vector2( 980, 220 )
-nodes/tr_movement/node = SubResource( 12 )
-nodes/tr_movement/position = Vector2( 420, 180 )
-node_connections = [ "output", 0, "tr_alive", "tr_alive", 0, "os_hurt", "tr_alive", 1, "an_dead", "os_hurt", 0, "tr_movement", "os_hurt", 1, "an_hurt", "tr_movement", 0, "an_idle", "tr_movement", 1, "an_run" ]
-
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
 ]]
@@ -191,7 +145,7 @@ anims/idle = SubResource( 4 )
 anims/run = SubResource( 5 )
 
 [node name="AnimTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 13 )
+tree_root = ExtResource( 3 )
 anim_player = NodePath("../AnimPlayer")
 parameters/os_hurt/active = false
 parameters/tr_alive/current = 0

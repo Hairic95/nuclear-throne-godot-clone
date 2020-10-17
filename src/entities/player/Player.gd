@@ -5,7 +5,6 @@ const SPEED : float = 150.0
 export (PackedScene) var bullet_reference = preload("res://src/entities/bullets/Bullet.tscn")
 
 var is_alive : bool = true
-var is_moving_by_player : bool = false
 
 var direction_input : Vector2 = Vector2.ZERO
 
@@ -54,10 +53,7 @@ func _process(delta):
 		if Input.is_action_just_pressed("next_weapon"):
 			next_weapon()
 		
-		if Input.is_key_pressed(KEY_W) || Input.is_key_pressed(KEY_S) || Input.is_key_pressed(KEY_A) || Input.is_key_pressed(KEY_D):
-			is_moving_by_player = true
-		
-		if is_moving_by_player and direction_input != Vector2.ZERO:
+		if direction_input != Vector2.ZERO:
 			 $AnimTree.set("parameters/tr_movement/current", 1)
 		else:
 			 $AnimTree.set("parameters/tr_movement/current", 0)
@@ -67,7 +63,6 @@ func _process(delta):
 	move_and_slide(direction_input.normalized() * SPEED)
 	
 	direction_input = Vector2.ZERO
-	is_moving_by_player = false
 
 func add_weapon(new_weapon_reference):
 	var new_weapon = new_weapon_reference.instance()
@@ -80,10 +75,7 @@ func next_weapon():
 	
 	for weapon_index in range($Weapons.get_child_count()):
 		if $Weapons.get_child(weapon_index).active:
-			print(weapon_index)
-			print($Weapons.get_child_count())
 			if $Weapons.get_child_count() - 1 == weapon_index:
-				print(current_weapon)
 				set_current_weapon($Weapons.get_child(0))
 			else:
 				set_current_weapon($Weapons.get_child(weapon_index + 1))

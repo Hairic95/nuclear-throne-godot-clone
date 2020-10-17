@@ -1,4 +1,4 @@
-extends Area2D
+extends KinematicBody2D
 class_name Bullet
 
 var speed : float = 800
@@ -12,20 +12,15 @@ func _ready():
 
 func _physics_process(delta):
 	
-	global_position += direction * speed * delta
+	var collision = move_and_collide(direction * speed * delta)
 	
-	if timer > 100:
+	if collision:
 		queue_free()
-	else:
-		timer += delta
-	
-	if $Direction.is_colliding():
-		# TODO Change to a destroy animation
-		$Sprite.hide()
 	
 
 func setup():
 	direction = Vector2(cos(rotation), sin(rotation))
 
-func _on_WallDetect_body_entered(body):
-	queue_free()
+func _on_Hitbox_area_entered(area):
+	if area.is_in_group("enemy_hitbox"):
+		queue_free()

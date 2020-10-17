@@ -11,6 +11,8 @@ var tiles = []
 var walls = []
 var outerwalls = []
 
+var enemies = []
+
 func _ready():
 	randomize()
 
@@ -117,6 +119,10 @@ func create_level_with_explosion():
 			walls.append(tile + Vector2.UP + Vector2.RIGHT)
 		if !(tiles.has(tile + Vector2.DOWN + Vector2.RIGHT)):
 			walls.append(tile + Vector2.DOWN + Vector2.RIGHT)
+		
+		if randi()% 20 == 0:
+			enemies.append(tile)
+		
 	
 	for wall in walls:
 		if !walls.has(wall + Vector2.DOWN) && !tiles.has(wall + Vector2.DOWN):

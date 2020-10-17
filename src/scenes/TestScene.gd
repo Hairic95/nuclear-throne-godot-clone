@@ -23,6 +23,11 @@ func _ready():
 		$YSortable/StaticWalls.set_cell(wall.x, wall.y, 1)
 	for outerwall in ($LevelGeneration.outerwalls):
 		$YSortable/StaticWalls.set_cell(outerwall.x, outerwall.y, 2)
+	
+	for enemy in ($LevelGeneration.enemies):
+		var new_enemy = preload("res://src/entities/enemies/Enemy.tscn").instance()
+		new_enemy.global_position = $Statics.map_to_world(enemy)
+		$YSortable/Entities.add_child(new_enemy)
 
 func add_bullet(bullet_instance, starting_position, bullet_rotation):
 	bullet_instance.global_position = starting_position
