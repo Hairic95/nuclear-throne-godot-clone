@@ -14,7 +14,7 @@ pistol_reference = ExtResource( 6 )
 
 [node name="Statics" type="TileMap" parent="."]
 tile_set = ExtResource( 3 )
-cell_size = Vector2( 16, 16 )
+cell_size = Vector2( 24, 24 )
 format = 1
 
 [node name="Bullets" type="Node2D" parent="."]
@@ -23,7 +23,7 @@ format = 1
 
 [node name="StaticWalls" type="TileMap" parent="YSortable"]
 tile_set = ExtResource( 3 )
-cell_size = Vector2( 16, 16 )
+cell_size = Vector2( 24, 24 )
 cell_y_sort = true
 collision_layer = 7
 collision_mask = 7

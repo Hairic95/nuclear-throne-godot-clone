@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/textures/entitites/enemies/test_enemy.png" type="Texture" id=1]
 [ext_resource path="res://assets/animation_tree/character_basic_tree.tres" type="AnimationNodeBlendTree" id=2]
 [ext_resource path="res://src/entities/enemies/Enemy.gd" type="Script" id=3]
+[ext_resource path="res://assets/textures/entitites/shadow.png" type="Texture" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 5.75845
@@ -134,9 +135,14 @@ position = Vector2( 0, 5 )
 rotation = 1.5708
 shape = SubResource( 1 )
 
+[node name="Shadow" type="Sprite" parent="."]
+position = Vector2( 0, 8 )
+texture = ExtResource( 4 )
+
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 hframes = 12
+frame = 1
 
 [node name="AnimPlayer" type="AnimationPlayer" parent="."]
 anims/dead = SubResource( 6 )

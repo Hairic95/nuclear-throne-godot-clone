@@ -4,9 +4,8 @@
 [ext_resource path="res://assets/textures/background/floor.png" type="Texture" id=2]
 [ext_resource path="res://assets/textures/background/outer_wall.png" type="Texture" id=3]
 
-
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 8.5 )
+extents = Vector2( 12, 12 )
 
 [node name="TestTileset" type="Node"]
 
@@ -14,15 +13,16 @@ extents = Vector2( 8, 8.5 )
 texture = ExtResource( 2 )
 
 [node name="wall" type="Sprite" parent="."]
-position = Vector2( 24, 0 )
+position = Vector2( 32, 0 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -4 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="wall"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wall/StaticBody2D"]
+position = Vector2( 0, 2 )
 shape = SubResource( 1 )
 
 [node name="outerwall" type="Sprite" parent="."]
-position = Vector2( 48, 0 )
+position = Vector2( 64, 0 )
 texture = ExtResource( 3 )
