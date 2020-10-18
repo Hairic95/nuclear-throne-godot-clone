@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/entities/bullets/Pellet.tscn" type="PackedScene" id=1]
+
+[node name="Pellet" groups=[
+"enemy_bullet",
+] instance=ExtResource( 1 )]
+target_hitbox = "player_hitbox"
+speed = 800.0

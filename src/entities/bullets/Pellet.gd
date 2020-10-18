@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 var direction : Vector2 = Vector2.ZERO
 
+export (String, "enemy_hitbox", "player_hitbox") var target_hitbox = "enemy_hitbox"
+
 export (float) var speed = 800
 
 func _physics_process(delta):
@@ -23,5 +25,5 @@ func setup():
 
 
 func _on_Hitbox_area_entered(area):
-	if area.is_in_group("enemy_hitbox"):
+	if area.is_in_group(target_hitbox):
 		queue_free()

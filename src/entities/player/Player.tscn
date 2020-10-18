@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/textures/entitites/shadow.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6, 5 )
+extents = Vector2( 8, 8 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "dead"
@@ -128,7 +128,7 @@ tracks/1/keys = {
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 4 )
+position = Vector2( 0, -1 )
 shape = SubResource( 1 )
 
 [node name="shadow" type="Sprite" parent="."]

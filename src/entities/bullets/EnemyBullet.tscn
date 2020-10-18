@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/entities/bullets/Bullet.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/textures/weapons/enemy_bullet.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 5.48123
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 5.44591
+
+[node name="Bullet" instance=ExtResource( 1 )]
+speed = 200.0
+target_hitbox = "player_hitbox"
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource( 1 )
+
+[node name="Hitbox" parent="." index="3" groups=[
+"enemy_bullet",
+]]
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2( 0.0743256, 0 )
+shape = SubResource( 2 )

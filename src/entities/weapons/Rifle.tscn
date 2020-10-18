@@ -3,7 +3,7 @@
 [ext_resource path="res://src/entities/weapons/Weapon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/textures/weapons/rifle.png" type="Texture" id=2]
 [ext_resource path="res://src/entities/weapons/Rifle.gd" type="Script" id=3]
-[ext_resource path="res://src/entities/bullets/Bullet.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/entities/bullets/PlayerBullet.tscn" type="PackedScene" id=4]
 
 [node name="Rifle" instance=ExtResource( 1 )]
 texture = ExtResource( 2 )
@@ -12,4 +12,4 @@ script = ExtResource( 3 )
 is_automatic = true
 reload_time = 0.55
 drop_weapon = null
-bullet_reference = ExtResource( 5 )
+bullet_reference = ExtResource( 4 )
