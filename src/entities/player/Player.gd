@@ -14,6 +14,8 @@ var current_weapon = null
 
 var max_weapon_slot = 2
 
+var health = 4
+
 func _ready():
 	$AnimTree.active = true
 
@@ -34,14 +36,6 @@ func _process(delta):
 			$Sprite.flip_h = true
 		if get_global_mouse_position().x > global_position.x:
 			$Sprite.flip_h = false
-		
-		
-		if Input.is_key_pressed(KEY_H):
-			$AnimTree.set("parameters/os_hurt/active", true)
-		
-		if Input.is_key_pressed(KEY_K):
-			$AnimTree.set("parameters/tr_alive/current", 1)
-			is_alive = false
 		
 		if Input.is_action_just_pressed("interact") and current_interactive_obj != null:
 			if current_interactive_obj is InteractiveWeapon:
@@ -100,3 +94,17 @@ func drop_current_weapon():
 func handle_camera_position():
 	var new_camera_position = global_position + (get_global_mouse_position() - global_position) / 3
 	$CameraHandler.global_position = new_camera_position
+
+
+func _on_Hitbox_area_entered(area):
+	if area.is_in_group("enemy_bullet"):
+		take_damage(1)
+
+func take_damage(damage):
+	health = max(0, health - damage)
+	if health <= 0:
+		$AnimTree.set("parameters/tr_alive/current", 1)
+		is_alive = false
+		
+	else:
+		$AnimTree.set("parameters/os_hurt/active", true)

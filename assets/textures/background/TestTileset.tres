@@ -24,14 +24,14 @@ extents = Vector2( 12, 12 )
 0/z_index = 0
 1/name = "wall"
 1/texture = ExtResource( 1 )
-1/tex_offset = Vector2( 0, -4 )
+1/tex_offset = Vector2( 0, -6 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 0, 0, 24, 36 )
 1/tile_mode = 0
 1/occluder_offset = Vector2( 12, 18 )
 1/navigation_offset = Vector2( 12, 18 )
-1/shape_offset = Vector2( 12, 20 )
-1/shape_transform = Transform2D( 1, 0, 0, 1, 12, 20 )
+1/shape_offset = Vector2( 12, 18 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 12, 18 )
 1/shape = SubResource( 1 )
 1/shape_one_way = false
 1/shape_one_way_margin = 1.0
@@ -40,7 +40,7 @@ extents = Vector2( 12, 12 )
 "one_way": false,
 "one_way_margin": 1.0,
 "shape": SubResource( 1 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 12, 20 )
+"shape_transform": Transform2D( 1, 0, 0, 1, 12, 18 )
 } ]
 1/z_index = 0
 2/name = "outerwall"

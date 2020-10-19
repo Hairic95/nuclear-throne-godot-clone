@@ -15,12 +15,11 @@ texture = ExtResource( 2 )
 [node name="wall" type="Sprite" parent="."]
 position = Vector2( 32, 0 )
 texture = ExtResource( 1 )
-offset = Vector2( 0, -4 )
+offset = Vector2( 0, -6 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="wall"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wall/StaticBody2D"]
-position = Vector2( 0, 2 )
 shape = SubResource( 1 )
 
 [node name="outerwall" type="Sprite" parent="."]

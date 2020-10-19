@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/entities/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/textures/entitites/player/fungus.png" type="Texture" id=2]
@@ -122,6 +122,9 @@ tracks/1/keys = {
 "values": [ 4, 5, 6, 7, 8, 9 ]
 }
 
+[sub_resource type="CircleShape2D" id=6]
+radius = 6.15921
+
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
 ]]
@@ -173,5 +176,15 @@ wait_time = 0.1
 [node name="Duration" type="Timer" parent="CameraHandler"]
 wait_time = 0.3
 one_shot = true
+
+[node name="Hitbox" type="Area2D" parent="." groups=[
+"player_hitbox",
+]]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource( 6 )
 [connection signal="timeout" from="CameraHandler/Frequency" to="CameraHandler" method="_on_Frequency_timeout"]
 [connection signal="timeout" from="CameraHandler/Duration" to="CameraHandler" method="_on_Duration_timeout"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
