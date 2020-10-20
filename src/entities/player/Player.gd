@@ -3,6 +3,7 @@ extends KinematicBody2D
 const SPEED : float = 150.0
 
 export (PackedScene) var bullet_reference = preload("res://src/entities/bullets/Bullet.tscn")
+export (PackedScene) var scent_reference = preload("res://src/entities/player/components/Scent.tscn")
 
 var is_alive : bool = true
 
@@ -15,6 +16,8 @@ var current_weapon = null
 var max_weapon_slot = 2
 
 var health = 4
+
+var scent_trail = []
 
 func _ready():
 	$AnimTree.active = true
@@ -108,3 +111,15 @@ func take_damage(damage):
 		
 	else:
 		$AnimTree.set("parameters/os_hurt/active", true)
+
+func emit_scent():
+	var new_scent = scent_reference.instance()
+	new_scent.global_position = global_position
+	if scent_trail.size() > 20:
+		var oldest_scent = scent_trail.pop_front()
+		oldest_scent.queue_free()
+	scent_trail.append(new_scent)
+	EventBus.emit_signal("emit_scent", new_scent)
+
+func _on_ScentTimer_timeout():
+	emit_scent()

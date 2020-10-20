@@ -9,6 +9,8 @@ signal start_screenshake(force)
 
 signal drop_weapon(drop_weapon_instance, position)
 
+signal emit_scent(new_scent)
+
 # test
 
 signal test_throw_weapon(direction)

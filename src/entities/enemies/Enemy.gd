@@ -7,12 +7,25 @@ var is_alive = true
 
 var player_in_range = null
 
+var speed = 100
+
 func _ready():
 	randomize()
 
 func _process(delta):
 	if is_alive:
 		if player_in_range != null:
+			$Vision.cast_to = global_position - player_in_range.global_position
+			$Vision.force_raycast_update()
+			if !$Vision.is_colliding():
+				
+				if player_in_range.global_position.x > global_position.x:
+					$Sprite.flip_h = false
+				else:
+					$Sprite.flip_h = true
+				
+				move_and_collide((player_in_range.global_position - global_position).normalized() * speed * delta)
+			
 			$Vision.look_at(player_in_range.global_position)
 		else:
 			$Vision.rotate(delta * PI * 4)

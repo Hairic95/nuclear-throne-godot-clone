@@ -19,6 +19,8 @@ format = 1
 
 [node name="Bullets" type="Node2D" parent="."]
 
+[node name="Scents" type="Node2D" parent="."]
+
 [node name="YSortable" type="YSort" parent="."]
 
 [node name="StaticWalls" type="TileMap" parent="YSortable"]

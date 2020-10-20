@@ -15,6 +15,8 @@ func _ready():
 	
 	EventBus.connect("drop_weapon", self, "create_drop_weapon_at")
 	
+	EventBus.connect("emit_scent", self, "add_scent")
+	
 	$LevelGeneration.create_level_with_explosion()
 	
 	for tile in ($LevelGeneration.tiles):
@@ -58,3 +60,6 @@ func test_throw_weapon(direction):
 func create_drop_weapon_at(weapon_instance, global_pos):
 	weapon_instance.global_position = global_pos
 	$YSortable/Entities.add_child(weapon_instance)
+
+func add_scent(new_scent):
+	$Scents.add_child(new_scent)
