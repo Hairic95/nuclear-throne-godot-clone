@@ -45,7 +45,7 @@ func _process(delta):
 				direction = (player_in_range.global_position - global_position).normalized()
 				
 			else:
-				direction = Vector2.ZERO
+				direction = (global_position - player_in_range.global_position).normalized()
 				
 				if !following_player:
 					player_in_range = null
