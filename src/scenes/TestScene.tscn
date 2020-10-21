@@ -27,8 +27,8 @@ format = 1
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 24, 24 )
 cell_y_sort = true
-collision_layer = 7
-collision_mask = 7
+collision_layer = 15
+collision_mask = 15
 format = 1
 
 [node name="Entities" type="YSort" parent="YSortable"]

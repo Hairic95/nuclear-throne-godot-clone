@@ -129,6 +129,8 @@ radius = 5.95784
 height = 7.01833
 
 [node name="Enemy" type="KinematicBody2D"]
+collision_layer = 8
+collision_mask = 8
 script = ExtResource( 3 )
 bullet_reference = ExtResource( 5 )
 

@@ -7,7 +7,9 @@ var is_alive = true
 
 var player_in_range = null
 
-var speed = 100
+var direction = Vector2.ZERO
+
+var speed = 40
 
 func _ready():
 	randomize()
@@ -24,11 +26,25 @@ func _process(delta):
 				else:
 					$Sprite.flip_h = true
 				
-				move_and_collide((player_in_range.global_position - global_position).normalized() * speed * delta)
-			
-			$Vision.look_at(player_in_range.global_position)
+				direction = (player_in_range.global_position - global_position).normalized()
+				
+			else:
+				var following_player = false
+				
+				for scent in player_in_range.scent_trail:
+					$Vision.cast_to = (scent.global_position - global_position)
+					$Vision.force_raycast_update()
+					if !$Vision.is_colliding():
+						direction = (scent.global_position - global_position).normalized()
+						following_player = true
+						break
+				
+				if !following_player:
+					player_in_range = null
+					direction = Vector2.ZERO
+					$ShootChanceInterval.stop()
 		else:
-			$Vision.rotate(delta * PI * 4)
+			$Vision.rotate(delta * PI * 6)
 			$Vision.cast_to = Vector2(120, 0)
 			$Vision.force_raycast_update()
 			if $Vision.is_colliding():
@@ -36,6 +52,13 @@ func _process(delta):
 				if collider.is_in_group("player"):
 					player_in_range = collider
 					$ShootChanceInterval.start()
+		
+		move_and_collide(direction * speed * delta)
+		
+		if direction != Vector2.ZERO:
+			 $AnimTree.set("parameters/tr_movement/current", 1)
+		else:
+			 $AnimTree.set("parameters/tr_movement/current", 0)
 
 var health = 4
 

@@ -116,9 +116,9 @@ func emit_scent():
 	var new_scent = scent_reference.instance()
 	new_scent.global_position = global_position
 	if scent_trail.size() > 20:
-		var oldest_scent = scent_trail.pop_front()
+		var oldest_scent = scent_trail.pop_back()
 		oldest_scent.queue_free()
-	scent_trail.append(new_scent)
+	scent_trail.push_front(new_scent)
 	EventBus.emit_signal("emit_scent", new_scent)
 
 func _on_ScentTimer_timeout():
