@@ -23,29 +23,29 @@ func _process(delta):
 			$Vision.rotation = PI
 			$Vision.cast_to = global_position - player_in_range.global_position
 			$Vision.force_raycast_update()
-			if !$Vision.is_colliding():
+			
+			
+			var following_player = false
+			
+			for scent in player_in_range.scent_trail:
+				$Vision.cast_to = (global_position - scent.global_position)
+				$Vision.force_raycast_update()
+				if !$Vision.is_colliding():
+					direction = (scent.global_position - global_position).normalized()
+					following_player = true
+					break
 				
-				if (player_in_range.global_position - global_position).length() > 100:
-					
-					if player_in_range.global_position.x > global_position.x:
-						$Sprite.flip_h = false
-					else:
-						$Sprite.flip_h = true
-					
-					direction = (player_in_range.global_position - global_position).normalized()
-					
+			if (player_in_range.global_position - global_position).length() > 100:
+				
+				if player_in_range.global_position.x > global_position.x:
+					$Sprite.flip_h = false
 				else:
-					direction = Vector2.ZERO
-			else:
-				var following_player = false
+					$Sprite.flip_h = true
 				
-				for scent in player_in_range.scent_trail:
-					$Vision.cast_to = (global_position - scent.global_position)
-					$Vision.force_raycast_update()
-					if !$Vision.is_colliding():
-						direction = (scent.global_position - global_position).normalized()
-						following_player = true
-						break
+				direction = (player_in_range.global_position - global_position).normalized()
+				
+			else:
+				direction = Vector2.ZERO
 				
 				if !following_player:
 					player_in_range = null

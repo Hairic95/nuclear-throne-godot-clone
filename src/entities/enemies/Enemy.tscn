@@ -146,7 +146,7 @@ texture = ExtResource( 4 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 hframes = 12
-frame = 2
+frame = 3
 
 [node name="AnimPlayer" type="AnimationPlayer" parent="."]
 anims/dead = SubResource( 2 )
@@ -187,6 +187,7 @@ shape = SubResource( 6 )
 [node name="Vision" type="RayCast2D" parent="."]
 enabled = true
 cast_to = Vector2( 120, 0 )
+collision_mask = 2147483649
 
 [node name="ShootChanceInterval" type="Timer" parent="."]
 wait_time = 0.5
