@@ -15,9 +15,11 @@ var current_weapon = null
 
 var max_weapon_slot = 2
 
-var health = 4
+var health = 400
 
 var scent_trail = []
+
+var inner_pushbox = []
 
 func _ready():
 	$AnimTree.active = true
@@ -57,7 +59,13 @@ func _process(delta):
 		
 		handle_camera_position()
 	
-	move_and_slide(direction_input.normalized() * SPEED)
+	
+	var push_force = Vector2.ZERO
+	for pushbox in inner_pushbox:
+		push_force += (global_position - pushbox.global_position).normalized() * 10
+	
+	
+	move_and_slide(direction_input.normalized() * SPEED + push_force)
 	
 	direction_input = Vector2.ZERO
 
@@ -115,7 +123,7 @@ func take_damage(damage):
 func emit_scent():
 	var new_scent = scent_reference.instance()
 	new_scent.global_position = global_position
-	if scent_trail.size() > 20:
+	if scent_trail.size() > 50:
 		var oldest_scent = scent_trail.pop_back()
 		oldest_scent.queue_free()
 	scent_trail.push_front(new_scent)
@@ -123,3 +131,13 @@ func emit_scent():
 
 func _on_ScentTimer_timeout():
 	emit_scent()
+
+
+func _on_PushBox_area_entered(area):
+	if area.is_in_group("pushbox"):
+		inner_pushbox.append(area)
+
+
+func _on_PushBox_area_exited(area):
+	if inner_pushbox.has(area):
+		inner_pushbox.erase(area)

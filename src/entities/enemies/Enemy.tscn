@@ -129,7 +129,7 @@ radius = 5.95784
 height = 7.01833
 
 [node name="Enemy" type="KinematicBody2D"]
-collision_layer = 8
+collision_layer = 0
 collision_mask = 8
 script = ExtResource( 3 )
 bullet_reference = ExtResource( 5 )
@@ -173,6 +173,17 @@ position = Vector2( -0.0834274, 5.08908 )
 rotation = 1.5708
 shape = SubResource( 6 )
 
+[node name="PushBox" type="Area2D" parent="." groups=[
+"pushbox",
+]]
+collision_layer = 9
+collision_mask = 2147483657
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="PushBox"]
+position = Vector2( -0.0834274, 5.08908 )
+rotation = 1.5708
+shape = SubResource( 6 )
+
 [node name="Vision" type="RayCast2D" parent="."]
 enabled = true
 cast_to = Vector2( 120, 0 )
@@ -180,4 +191,6 @@ cast_to = Vector2( 120, 0 )
 [node name="ShootChanceInterval" type="Timer" parent="."]
 wait_time = 0.5
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
+[connection signal="area_entered" from="PushBox" to="." method="_on_PushBox_area_entered"]
+[connection signal="area_exited" from="PushBox" to="." method="_on_PushBox_area_exited"]
 [connection signal="timeout" from="ShootChanceInterval" to="." method="_on_ShootChanceInterval_timeout"]

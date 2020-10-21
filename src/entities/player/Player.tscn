@@ -189,7 +189,16 @@ shape = SubResource( 6 )
 [node name="ScentTimer" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
+
+[node name="PushBox" type="Area2D" parent="." groups=[
+"pushbox",
+]]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="PushBox"]
+shape = SubResource( 6 )
 [connection signal="timeout" from="CameraHandler/Frequency" to="CameraHandler" method="_on_Frequency_timeout"]
 [connection signal="timeout" from="CameraHandler/Duration" to="CameraHandler" method="_on_Duration_timeout"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
 [connection signal="timeout" from="ScentTimer" to="." method="_on_ScentTimer_timeout"]
+[connection signal="area_entered" from="PushBox" to="." method="_on_PushBox_area_entered"]
+[connection signal="area_exited" from="PushBox" to="." method="_on_PushBox_area_exited"]

@@ -11,6 +11,8 @@ var direction = Vector2.ZERO
 
 var speed = 40
 
+var inner_pushbox = []
+
 func _ready():
 	randomize()
 
@@ -21,13 +23,17 @@ func _process(delta):
 			$Vision.force_raycast_update()
 			if !$Vision.is_colliding():
 				
-				if player_in_range.global_position.x > global_position.x:
-					$Sprite.flip_h = false
+				if (player_in_range.global_position - global_position).length() > 100:
+					
+					if player_in_range.global_position.x > global_position.x:
+						$Sprite.flip_h = false
+					else:
+						$Sprite.flip_h = true
+					
+					direction = (player_in_range.global_position - global_position).normalized()
+					
 				else:
-					$Sprite.flip_h = true
-				
-				direction = (player_in_range.global_position - global_position).normalized()
-				
+					direction = Vector2.ZERO
 			else:
 				var following_player = false
 				
@@ -53,7 +59,11 @@ func _process(delta):
 					player_in_range = collider
 					$ShootChanceInterval.start()
 		
-		move_and_collide(direction * speed * delta)
+		var push_force = Vector2.ZERO
+		for pushbox in inner_pushbox:
+			push_force += (global_position - pushbox.global_position).normalized() * 20
+		
+		move_and_collide((direction * speed + push_force) * delta)
 		
 		if direction != Vector2.ZERO:
 			 $AnimTree.set("parameters/tr_movement/current", 1)
@@ -86,3 +96,13 @@ func _on_ShootChanceInterval_timeout():
 
 func shoot():
 	EventBus.emit_signal("create_bullet", bullet_reference.instance(), global_position, $Vision.rotation)
+
+
+func _on_PushBox_area_entered(area):
+	if area.is_in_group("pushbox"):
+		inner_pushbox.append(area)
+
+
+func _on_PushBox_area_exited(area):
+	if inner_pushbox.has(area):
+		inner_pushbox.erase(area)
