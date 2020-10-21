@@ -193,6 +193,8 @@ autostart = true
 [node name="PushBox" type="Area2D" parent="." groups=[
 "pushbox",
 ]]
+collision_layer = 9
+collision_mask = 9
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="PushBox"]
 shape = SubResource( 6 )

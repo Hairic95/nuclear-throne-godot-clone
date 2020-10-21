@@ -15,7 +15,7 @@ var current_weapon = null
 
 var max_weapon_slot = 2
 
-var health = 400
+var health = 4
 
 var scent_trail = []
 
