@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/entities/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/scenes/TestScene.gd" type="Script" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://src/scenes/LevelGeneration.gd" type="Script" id=4]
 [ext_resource path="res://src/entities/objects/dropWeapons/DropRifle.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/entities/objects/dropWeapons/DropShotgun.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/textures/ui/lifebar_under.png" type="Texture" id=7]
+[ext_resource path="res://assets/textures/ui/lifebar_upper.png" type="Texture" id=8]
+[ext_resource path="res://assets/textures/shaders/black_image_white_outline.tres" type="Material" id=9]
 
 [node name="TestScene" type="Node2D"]
 script = ExtResource( 2 )
@@ -37,3 +40,45 @@ format = 1
 
 [node name="LevelGeneration" type="Node" parent="."]
 script = ExtResource( 4 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Screen" type="Control" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerInfo" type="VBoxContainer" parent="UI/Screen"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 104.0
+margin_bottom = 48.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthBar" type="TextureProgress" parent="UI/Screen/PlayerInfo"]
+margin_right = 96.0
+margin_bottom = 12.0
+max_value = 8.0
+value = 8.0
+texture_under = ExtResource( 7 )
+texture_progress = ExtResource( 8 )
+
+[node name="Weapons" type="HBoxContainer" parent="UI/Screen/PlayerInfo"]
+margin_top = 16.0
+margin_right = 96.0
+margin_bottom = 16.0
+alignment = 1
+
+[node name="Slot1" type="TextureRect" parent="UI/Screen/PlayerInfo/Weapons"]
+material = ExtResource( 9 )
+margin_left = 46.0
+margin_right = 46.0
+
+[node name="Slot2" type="TextureRect" parent="UI/Screen/PlayerInfo/Weapons"]
+material = ExtResource( 9 )
+margin_left = 50.0
+margin_right = 50.0

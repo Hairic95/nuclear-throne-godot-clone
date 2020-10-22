@@ -17,6 +17,9 @@ func _ready():
 	
 	EventBus.connect("emit_scent", self, "add_scent")
 	
+	EventBus.connect("got_weapon", self, "display_weapon")
+	EventBus.connect("health_changed", self, "health_changed")
+	
 	$LevelGeneration.create_level_with_explosion()
 	
 	for tile in ($LevelGeneration.tiles):
@@ -63,3 +66,13 @@ func create_drop_weapon_at(weapon_instance, global_pos):
 
 func add_scent(new_scent):
 	$Scents.add_child(new_scent)
+
+func display_weapon(weapon_sprite, slot):
+	if slot == 0:
+		$UI/Screen/PlayerInfo/Weapons/Slot1.texture = weapon_sprite
+	elif slot == 1:
+		$UI/Screen/PlayerInfo/Weapons/Slot2.texture = weapon_sprite
+
+func health_changed(max_health, health):
+	$UI/Screen/PlayerInfo/HealthBar.max_value = max_health
+	$UI/Screen/PlayerInfo/HealthBar.value = health

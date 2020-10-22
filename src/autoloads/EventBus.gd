@@ -11,6 +11,11 @@ signal drop_weapon(drop_weapon_instance, position)
 
 signal emit_scent(new_scent)
 
+# Player UI
+
+signal got_weapon(weapon_sprite, slot)
+signal health_changed(max_health, current_health)
+
 # test
 
 signal test_throw_weapon(direction)

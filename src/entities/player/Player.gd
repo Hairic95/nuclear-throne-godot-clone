@@ -15,7 +15,8 @@ var current_weapon = null
 
 var max_weapon_slot = 2
 
-var health = 4
+var health = 8
+var max_health = 8
 
 var scent_trail = []
 
@@ -23,6 +24,8 @@ var inner_pushbox = []
 
 func _ready():
 	$AnimTree.active = true
+	
+	EventBus.emit_signal("health_changed", max_health, health)
 
 func _process(delta):
 	
@@ -74,6 +77,8 @@ func add_weapon(new_weapon_reference):
 	if $Weapons.get_child_count() >= max_weapon_slot:
 		drop_current_weapon()
 	$Weapons.add_child(new_weapon)
+	
+	EventBus.emit_signal("got_weapon", new_weapon.texture, $Weapons.get_child_count() - 1)
 	set_current_weapon(new_weapon)
 
 func next_weapon():
@@ -113,6 +118,7 @@ func _on_Hitbox_area_entered(area):
 
 func take_damage(damage):
 	health = max(0, health - damage)
+	EventBus.emit_signal("health_changed", max_health, health)
 	if health <= 0:
 		$AnimTree.set("parameters/tr_alive/current", 1)
 		is_alive = false
