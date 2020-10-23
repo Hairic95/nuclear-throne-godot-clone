@@ -20,7 +20,9 @@ func _ready():
 	EventBus.connect("got_weapon", self, "display_weapon")
 	EventBus.connect("health_changed", self, "health_changed")
 	
-	$LevelGeneration.create_level_with_explosion()
+	var level_details = LevelProgression.level_difficulty
+	
+	$LevelGeneration.create_level_with_explosion(level_details.size, level_details.enemies)
 	
 	for tile in ($LevelGeneration.tiles):
 		$Statics.set_cell(tile.x, tile.y, 0)
@@ -33,6 +35,11 @@ func _ready():
 		var new_enemy = preload("res://src/entities/enemies/Enemy.tscn").instance()
 		new_enemy.global_position = $Statics.map_to_world(enemy) + Vector2(12, 12)
 		$YSortable/Entities.add_child(new_enemy)
+
+func _process(delta):
+	if Input.is_action_just_pressed("ui_accept"):
+		LevelProgression.go_next_level()
+		get_tree().change_scene("res://src/scenes/TestScene.tscn")
 
 func add_bullet(bullet_instance, starting_position, bullet_rotation):
 	bullet_instance.global_position = starting_position

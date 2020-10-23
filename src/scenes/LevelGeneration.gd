@@ -61,7 +61,7 @@ func create_level():
 		if !walls.has(wall + Vector2.DOWN) && !tiles.has(wall + Vector2.DOWN):
 			outerwalls.append(wall + Vector2.DOWN)
 
-func create_level_with_explosion():
+func create_level_with_explosion(level_size, number_of_enemies):
 	
 	var iteration = 0
 	var maxIteration = 700
@@ -72,10 +72,9 @@ func create_level_with_explosion():
 					Vector2.ZERO, 
 					directions[randi()%directions.size()]))
 	
-	var max_tiles = 800
 	var explosions = 9
 	
-	while(iteration < maxIteration && max_tiles > tiles.size()):
+	while(iteration < maxIteration && level_size > tiles.size()):
 		
 		for walker in walkers:
 			if (!tiles.has(walker.position)):
@@ -119,10 +118,17 @@ func create_level_with_explosion():
 			walls.append(tile + Vector2.UP + Vector2.RIGHT)
 		if !(tiles.has(tile + Vector2.DOWN + Vector2.RIGHT)):
 			walls.append(tile + Vector2.DOWN + Vector2.RIGHT)
+	
+	var taken_tiles = []
+	
+	for i in range(number_of_enemies):
+		var selected_tile = tiles[randi()%tiles.size()]
+		while taken_tiles.has(selected_tile):
+			selected_tile = tiles[randi()%tiles.size()]
 		
-		if randi()% 20 == 0:
-			enemies.append(tile)
+		enemies.append(selected_tile)
 		
+		taken_tiles.append(selected_tile)
 	
 	for wall in walls:
 		if !walls.has(wall + Vector2.DOWN) && !tiles.has(wall + Vector2.DOWN):
