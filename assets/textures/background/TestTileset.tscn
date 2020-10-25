@@ -11,17 +11,20 @@ extents = Vector2( 12, 12 )
 
 [node name="floor" type="Sprite" parent="."]
 texture = ExtResource( 2 )
+offset = Vector2( 0, -12 )
 
 [node name="wall" type="Sprite" parent="."]
 position = Vector2( 32, 0 )
 texture = ExtResource( 1 )
-offset = Vector2( 0, -6 )
+offset = Vector2( 0, -18 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="wall"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wall/StaticBody2D"]
+position = Vector2( 0, -12 )
 shape = SubResource( 1 )
 
 [node name="outerwall" type="Sprite" parent="."]
 position = Vector2( 64, 0 )
 texture = ExtResource( 3 )
+offset = Vector2( 0, -12 )

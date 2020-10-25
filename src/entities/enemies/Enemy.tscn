@@ -146,7 +146,7 @@ texture = ExtResource( 4 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 hframes = 12
-frame = 1
+frame = 2
 
 [node name="AnimPlayer" type="AnimationPlayer" parent="."]
 anims/dead = SubResource( 2 )
