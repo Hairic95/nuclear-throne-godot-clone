@@ -13,6 +13,8 @@ var speed = 40
 
 var inner_pushbox = []
 
+var corpse_force = 300
+
 func _ready():
 	randomize()
 
@@ -72,26 +74,41 @@ func _process(delta):
 			 $AnimTree.set("parameters/tr_movement/current", 1)
 		else:
 			 $AnimTree.set("parameters/tr_movement/current", 0)
+	else:
+		
+		if corpse_force > 0:
+			var collision = move_and_collide(direction * corpse_force * delta)
+			
+			if collision:
+				direction = direction.bounce(collision.normal)
+			
+			corpse_force = max(0, corpse_force - 8)
+			
+			if corpse_force == 0:
+				$Hitbox.remove_from_group("player_bullet")
+			
 
 var health = 4
 
-func take_damage(damage):
-	print("dude")
+func take_damage(damage, bullet_dir):
 	health = max(0, health - damage)
 	if health > 0:
 		$AnimTree.set("parameters/os_hurt/active", true)
 	else:
 		$AnimTree.set("parameters/tr_alive/current", 1)
 		$ShootChanceInterval.stop()
-		$Hitbox.queue_free()
-		$Collision.queue_free()
+		$Hitbox.remove_from_group("enemy_hitbox")
+		$Hitbox.add_to_group("player_bullet")
 		is_alive = false
+		direction = bullet_dir
 
 func _on_Hitbox_area_entered(area):
 	if is_alive:
 		if area.is_in_group("player_bullet"):
-			take_damage(1)
-
+			take_damage(1, area.get_parent().direction)
+	else:
+		if area.is_in_group("enemy_hitbox"):
+			direction = direction.bounce((area.global_position - global_position).normalized())
 
 func _on_ShootChanceInterval_timeout():
 	if randi() % 5 == 0:
