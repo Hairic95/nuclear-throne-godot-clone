@@ -6,7 +6,7 @@
 [ext_resource path="res://src/entities/player/CameraHandler.gd" type="Script" id=4]
 [ext_resource path="res://assets/textures/entitites/shadow.png" type="Texture" id=5]
 
-[sub_resource type="CapsuleShape2D" id=7]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 4.57174
 height = 13.6018
 
@@ -134,7 +134,7 @@ script = ExtResource( 1 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
 rotation = 1.5708
-shape = SubResource( 7 )
+shape = SubResource( 1 )
 
 [node name="shadow" type="Sprite" parent="."]
 position = Vector2( 0, 1 )
@@ -200,7 +200,7 @@ collision_mask = 9
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="PushBox"]
 position = Vector2( 0, 11 )
 rotation = 1.5708
-shape = SubResource( 7 )
+shape = SubResource( 1 )
 
 [node name="ScentTimer" type="Timer" parent="."]
 wait_time = 0.1

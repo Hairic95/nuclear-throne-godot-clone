@@ -10,7 +10,12 @@ export (float) var reload_time = 0.2
 export (PackedScene) var drop_weapon 
 export (PackedScene) var bullet_reference = load("res://src/entities/bullets/Bullet.tscn")
 
+export (String, "bullet", "shell") var ammo_type = "bullet"
+export (int) var ammo_per_shoot = 1
+
 var active : bool = false
+
+var has_ammo : bool = false
 
 var is_reloading = false
 
@@ -19,16 +24,19 @@ func _ready():
 
 func _process(d):
 	if active:
-		if is_automatic:
-			if Input.is_action_pressed("click") and !is_reloading:
-				shoot()
-				is_reloading = true
-				$Reloading.start()
+		if has_ammo:
+			if is_automatic:
+				if Input.is_action_pressed("click") and !is_reloading:
+					shoot()
+					is_reloading = true
+					$Reloading.start()
+			else:
+				if Input.is_action_just_pressed("click") and !is_reloading:
+					shoot()
+					is_reloading = true
+					$Reloading.start()
 		else:
-			if Input.is_action_just_pressed("click") and !is_reloading:
-				shoot()
-				is_reloading = true
-				$Reloading.start()
+			EventBus.emit_signal("no_ammo_display", ammo_type)
 	handle_rotatation()
 
 

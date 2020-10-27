@@ -13,3 +13,4 @@ is_automatic = true
 reload_time = 0.55
 drop_weapon = null
 bullet_reference = ExtResource( 4 )
+ammo_per_shoot = 3

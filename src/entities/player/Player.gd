@@ -18,11 +18,18 @@ var max_weapon_slot = 2
 var health = 8
 var max_health = 8
 
+var ammos = {
+	"bullet": 5,
+	"shell": 2
+}
+
 var scent_trail = []
 
 var inner_pushbox = []
 
 func _ready():
+	EventBus.connect("consume_ammo", self, "consume_ammo")
+	
 	$AnimTree.active = true
 	
 	EventBus.emit_signal("health_changed", max_health, health)
@@ -78,6 +85,9 @@ func add_weapon(new_weapon_reference):
 		drop_current_weapon()
 	$Weapons.add_child(new_weapon)
 	
+	if new_weapon.ammo_per_shoot <= ammos[new_weapon.ammo_type]:
+		new_weapon.has_ammo = true
+	
 	EventBus.emit_signal("got_weapon", new_weapon.texture, $Weapons.get_child_count() - 1)
 	set_current_weapon(new_weapon)
 
@@ -110,7 +120,6 @@ func drop_current_weapon():
 func handle_camera_position():
 	var new_camera_position = global_position + (get_global_mouse_position() - global_position) / 3
 	$CameraHandler.global_position = new_camera_position
-
 
 func _on_Hitbox_area_entered(area):
 	if area.is_in_group("enemy_bullet"):
@@ -147,3 +156,11 @@ func _on_PushBox_area_entered(area):
 func _on_PushBox_area_exited(area):
 	if inner_pushbox.has(area):
 		inner_pushbox.erase(area)
+
+func consume_ammo(ammo_consumed, ammo_type):
+	ammos[ammo_type] = max(0, ammos[ammo_type] - ammo_consumed)
+	for weapon in $Weapons.get_children():
+		if weapon.ammo_type == ammo_type:
+			if weapon.ammo_per_shoot > ammos[ammo_type]:
+				weapon.has_ammo = false
+	EventBus.emit_signal("player_ammo_changed", ammo_type, ammos[ammo_type])

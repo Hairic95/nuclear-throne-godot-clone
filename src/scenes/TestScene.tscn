@@ -30,8 +30,8 @@ format = 1
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 24, 24 )
 cell_y_sort = true
-collision_layer = 15
-collision_mask = 15
+collision_layer = 262159
+collision_mask = 262159
 format = 1
 
 [node name="Entities" type="YSort" parent="YSortable"]
@@ -84,3 +84,16 @@ margin_right = 46.0
 material = ExtResource( 9 )
 margin_left = 50.0
 margin_right = 50.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Screen/PlayerInfo"]
+margin_top = 20.0
+margin_right = 96.0
+margin_bottom = 34.0
+
+[node name="BulletCount" type="Label" parent="UI/Screen/PlayerInfo/HBoxContainer"]
+margin_bottom = 14.0
+
+[node name="ShellCount" type="Label" parent="UI/Screen/PlayerInfo/HBoxContainer"]
+margin_left = 4.0
+margin_right = 4.0
+margin_bottom = 14.0

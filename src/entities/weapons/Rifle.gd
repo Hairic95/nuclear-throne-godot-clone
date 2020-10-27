@@ -5,7 +5,10 @@ func _ready():
 
 func shoot():
 	.shoot()
+	EventBus.emit_signal("consume_ammo", 1, ammo_type)
 	yield(get_tree().create_timer(.05), "timeout")
 	.shoot()
+	EventBus.emit_signal("consume_ammo", 1, ammo_type)
 	yield(get_tree().create_timer(.05), "timeout")
 	.shoot()
+	EventBus.emit_signal("consume_ammo", 1, ammo_type)

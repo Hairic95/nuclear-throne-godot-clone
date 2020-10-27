@@ -11,3 +11,5 @@ script = ExtResource( 4 )
 is_automatic = false
 reload_time = 0.4
 bullet_reference = ExtResource( 2 )
+ammo_type = "shell"
+ammo_per_shoot = 1

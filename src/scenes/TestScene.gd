@@ -20,6 +20,8 @@ func _ready():
 	EventBus.connect("got_weapon", self, "display_weapon")
 	EventBus.connect("health_changed", self, "health_changed")
 	
+	EventBus.connect("player_ammo_changed", self, "player_ammo_changed")
+	
 	var level_details = LevelProgression.level_difficulty
 	
 	$LevelGeneration.create_level_with_explosion(level_details.size, level_details.enemies)
@@ -83,3 +85,10 @@ func display_weapon(weapon_sprite, slot):
 func health_changed(max_health, health):
 	$UI/Screen/PlayerInfo/HealthBar.max_value = max_health
 	$UI/Screen/PlayerInfo/HealthBar.value = health
+
+func player_ammo_changed(ammo_type, ammo_quantity):
+	match ammo_type:
+		"bullet":
+			$UI/Screen/PlayerInfo/HBoxContainer/BulletCount.text = str(ammo_quantity)
+		"shell":
+			$UI/Screen/PlayerInfo/HBoxContainer/ShellCount.text = str(ammo_quantity)
