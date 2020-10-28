@@ -45,4 +45,4 @@ nodes/tr_alive/node = SubResource( 6 )
 nodes/tr_alive/position = Vector2( 980, 220 )
 nodes/tr_movement/node = SubResource( 7 )
 nodes/tr_movement/position = Vector2( 420, 180 )
-node_connections = [ "output", 0, "tr_alive", "tr_movement", 0, "an_idle", "tr_movement", 1, "an_run", "tr_alive", 0, "os_hurt", "tr_alive", 1, "an_dead", "os_hurt", 0, "tr_movement", "os_hurt", 1, "an_hurt" ]
+node_connections = [ "output", 0, "tr_alive", "tr_movement", 0, "an_idle", "tr_movement", 1, "an_run", "os_hurt", 0, "tr_movement", "os_hurt", 1, "an_hurt", "tr_alive", 0, "os_hurt", "tr_alive", 1, "an_dead" ]

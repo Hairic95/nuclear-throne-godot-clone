@@ -103,7 +103,5 @@ func player_ammo_changed(ammo_type, ammo_quantity):
 func spawn_ammo_pickup(global_pos):
 	var new_ammo_pickup = load("res://src/entities/objects/pickups/AmmoPickup.tscn").instance()
 	new_ammo_pickup.global_position = global_pos
-	
+	yield(get_tree().create_timer(0.01), "timeout")
 	$YSortable/Entities.add_child(new_ammo_pickup)
-	
-	
