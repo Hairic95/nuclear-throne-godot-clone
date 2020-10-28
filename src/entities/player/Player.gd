@@ -19,8 +19,8 @@ var health = 8
 var max_health = 8
 
 var ammos = {
-	"bullet": 5,
-	"shell": 2
+	"bullet": 0,
+	"shell": 0
 }
 
 var scent_trail = []
@@ -156,6 +156,10 @@ func _on_PushBox_area_entered(area):
 func _on_PushBox_area_exited(area):
 	if inner_pushbox.has(area):
 		inner_pushbox.erase(area)
+
+func give_ammo(ammo_type, ammo_quantity):
+	ammos[ammo_type] = min(ammo_quantity + ammos[ammo_type], Globals.max_ammo_quantities[ammo_type])
+	EventBus.emit_signal("player_ammo_changed", ammo_type, ammos[ammo_type])
 
 func consume_ammo(ammo_consumed, ammo_type):
 	ammos[ammo_type] = max(0, ammos[ammo_type] - ammo_consumed)

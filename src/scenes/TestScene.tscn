@@ -91,9 +91,14 @@ margin_right = 96.0
 margin_bottom = 34.0
 
 [node name="BulletCount" type="Label" parent="UI/Screen/PlayerInfo/HBoxContainer"]
+margin_right = 8.0
 margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "0"
 
 [node name="ShellCount" type="Label" parent="UI/Screen/PlayerInfo/HBoxContainer"]
-margin_left = 4.0
-margin_right = 4.0
+margin_left = 12.0
+margin_right = 20.0
 margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "0"

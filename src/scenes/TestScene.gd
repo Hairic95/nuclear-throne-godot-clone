@@ -21,6 +21,7 @@ func _ready():
 	EventBus.connect("health_changed", self, "health_changed")
 	
 	EventBus.connect("player_ammo_changed", self, "player_ammo_changed")
+	EventBus.connect("give_ammo", self, "give_ammo_to_player")
 	
 	var level_details = LevelProgression.level_difficulty
 	
@@ -85,6 +86,10 @@ func display_weapon(weapon_sprite, slot):
 func health_changed(max_health, health):
 	$UI/Screen/PlayerInfo/HealthBar.max_value = max_health
 	$UI/Screen/PlayerInfo/HealthBar.value = health
+
+func give_ammo_to_player(player, ammo_type, ammo_quantity):
+	player.give_ammo(ammo_type, ammo_quantity)
+
 
 func player_ammo_changed(ammo_type, ammo_quantity):
 	match ammo_type:
