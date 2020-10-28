@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/entities/objects/InteractiveWeapon.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "Pickup",
+"language": "GDScript",
+"path": "res://src/entities/objects/Pickup.gd"
+}, {
 "base": "Sprite",
 "class": "Weapon",
 "language": "GDScript",
@@ -39,6 +44,7 @@ _global_script_class_icons={
 "Enemy": "",
 "InteractiveObject": "",
 "InteractiveWeapon": "",
+"Pickup": "",
 "Weapon": ""
 }
 

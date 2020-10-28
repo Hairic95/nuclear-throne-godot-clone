@@ -11,6 +11,8 @@ signal drop_weapon(drop_weapon_instance, position)
 
 signal emit_scent(new_scent)
 
+signal drop_ammo_pickup(position)
+
 signal give_ammo(player, ammo_type, ammo_quantity)
 signal player_ammo_changed(ammo_type, ammo_quantity)
 signal consume_ammo(ammo_consumed, ammo_type)

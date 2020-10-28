@@ -101,6 +101,8 @@ func take_damage(damage, bullet_dir):
 		$Hitbox.add_to_group("player_bullet")
 		is_alive = false
 		direction = bullet_dir
+		
+		EventBus.emit_signal("drop_ammo_pickup", global_position)
 
 func _on_Hitbox_area_entered(area):
 	if is_alive:

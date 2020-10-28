@@ -23,6 +23,8 @@ var ammos = {
 	"shell": 0
 }
 
+var weapons = []
+
 var scent_trail = []
 
 var inner_pushbox = []
@@ -51,6 +53,10 @@ func _process(delta):
 			$Sprite.flip_h = true
 		if get_global_mouse_position().x > global_position.x:
 			$Sprite.flip_h = false
+		if get_global_mouse_position().y < global_position.y:
+			move_child($Weapons, 2)
+		if get_global_mouse_position().y > global_position.y:
+			move_child($Weapons, 3)
 		
 		if Input.is_action_just_pressed("interact") and current_interactive_obj != null:
 			if current_interactive_obj is InteractiveWeapon:
@@ -90,6 +96,8 @@ func add_weapon(new_weapon_reference):
 	
 	EventBus.emit_signal("got_weapon", new_weapon.texture, $Weapons.get_child_count() - 1)
 	set_current_weapon(new_weapon)
+	
+	weapons = $Weapons.get_children()
 
 func next_weapon():
 	
@@ -159,6 +167,10 @@ func _on_PushBox_area_exited(area):
 
 func give_ammo(ammo_type, ammo_quantity):
 	ammos[ammo_type] = min(ammo_quantity + ammos[ammo_type], Globals.max_ammo_quantities[ammo_type])
+	for weapon in $Weapons.get_children():
+		if weapon.ammo_type == ammo_type:
+			if weapon.ammo_per_shoot <= ammos[ammo_type]:
+				weapon.has_ammo = true
 	EventBus.emit_signal("player_ammo_changed", ammo_type, ammos[ammo_type])
 
 func consume_ammo(ammo_consumed, ammo_type):

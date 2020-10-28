@@ -23,6 +23,8 @@ func _ready():
 	EventBus.connect("player_ammo_changed", self, "player_ammo_changed")
 	EventBus.connect("give_ammo", self, "give_ammo_to_player")
 	
+	EventBus.connect("drop_ammo_pickup", self, "spawn_ammo_pickup")
+	
 	var level_details = LevelProgression.level_difficulty
 	
 	$LevelGeneration.create_level_with_explosion(level_details.size, level_details.enemies)
@@ -97,3 +99,11 @@ func player_ammo_changed(ammo_type, ammo_quantity):
 			$UI/Screen/PlayerInfo/HBoxContainer/BulletCount.text = str(ammo_quantity)
 		"shell":
 			$UI/Screen/PlayerInfo/HBoxContainer/ShellCount.text = str(ammo_quantity)
+
+func spawn_ammo_pickup(global_pos):
+	var new_ammo_pickup = load("res://src/entities/objects/pickups/AmmoPickup.tscn").instance()
+	new_ammo_pickup.global_position = global_pos
+	
+	$YSortable/Entities.add_child(new_ammo_pickup)
+	
+	
