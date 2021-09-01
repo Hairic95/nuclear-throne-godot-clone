@@ -30,7 +30,7 @@ func _ready():
 	$LevelGeneration.create_level_with_explosion(level_details.size, level_details.enemies)
 	
 	for tile in ($LevelGeneration.tiles):
-		$Statics.set_cell(tile.x, tile.y, 0)
+		$Statics.set_cell(tile.x, tile.y, randi()%3 + 1)
 	for wall in ($LevelGeneration.walls):
 		$YSortable/StaticWalls.set_cell(wall.x, wall.y, 1)
 	for outerwall in ($LevelGeneration.outerwalls):
